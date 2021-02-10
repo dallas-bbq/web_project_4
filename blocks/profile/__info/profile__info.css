@@ -3,7 +3,6 @@
     padding: 0;
     max-width: 415px;
     color: white;
-    flex-basis: 3;
     flex-shrink: 1;
     display: flex;
     flex-wrap: wrap;
