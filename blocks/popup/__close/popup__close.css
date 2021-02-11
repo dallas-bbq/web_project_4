@@ -1,0 +1,17 @@
+.popup__close {
+    transform: rotate(45deg);
+    color: white;
+    position: absolute;
+    font-size: 48px;
+    line-height: 100%;
+    font-weight: 400;
+    top: -40px;
+    right: -30px;
+}
+
+@media screen and (max-width: 420px) {
+    .popup__close {
+        right: 0;
+        top: -53px;
+    }
+}
