@@ -1,0 +1,14 @@
+.photos__like {
+    margin: 0;
+    padding: 0;
+    background-image: url('../../../images/heart.svg');
+    width: 21px;
+    height: 19px;
+    border: white;
+    background-color: white;
+    outline: none;
+}
+
+.photos__like:hover {
+    opacity: 0.6;
+}

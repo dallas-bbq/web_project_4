@@ -2,7 +2,9 @@
 @import url(./__caption/photos__caption.css);
 @import url(./__image/photos__image.css);
 @import url(./__text/photos__text.css);
-@import url(./__like-button/photos__like-button.css);
+@import url(./__like/photos__like.css);
+@import url(./__like/photos__like_act/photos__like_act.css);
+
 .photos {
     margin: 50px 0 0 0;
     padding: 0;

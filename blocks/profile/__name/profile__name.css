@@ -5,6 +5,7 @@
     font-size: 42px;
     line-height: 114%;
     flex-basis: auto;
+    min-width: 50%;
 }
 
 @media screen and (max-width: 480px) {

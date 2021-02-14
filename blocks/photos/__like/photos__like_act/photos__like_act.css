@@ -1,0 +1,9 @@
+.photos__like_act {
+    background-image: url('../../../../images/heart-active.svg');
+    margin: 0;
+    padding: 0;
+    width: 21px;
+    height: 19px;
+    border: white;
+    background-color: white;
+}

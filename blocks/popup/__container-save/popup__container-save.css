@@ -12,3 +12,8 @@
     line-height: 22px;
     text-align: center;
 }
+
+.popup__container-save:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+}

@@ -17,72 +17,72 @@
         <img class="profile__avatar" src="./images/cousteau.svg" alt="Jacques Cousteau">
         <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <img class="profile__edit-button" src="images/edit-button.svg" alt="Edit button">
+            <img class="button profile__edit" src="images/edit-button.svg" alt="Edit button">
             <p class="profile__title">Explorer</p>
         </div>
-        <div class="profile__add-button">
+        <button class="button profile__add">
             <img class="profile__plus-sign" src="./images/plus.svg" alt="Plus sign">
-        </div>
+        </button>
     </div>
     <ul class="photos">
         <li class="photos__card">
             <img class="photos__image" src="./images/yosemite-valley.svg" alt="Yosemite valley">
             <div class="photos__caption">
-                <p class="photos__text">Yosemite valley</p>
-                <img class="photos__like-button" src="./images/heart.svg" alt="Like button">
+                <p class="photos__text">Yosemite Valley</p>
+                <button class="button photos__like"></button>
             </div>
         </li>
         <li class="photos__card">
             <img class="photos__image" src="./images/lake-louise.svg" alt="Lake Louise">
             <div class="photos__caption">
                 <p class="photos__text">Lake Louise</p>
-                <img class="photos__like-button" src="./images/heart.svg" alt="Like button">
+                <button class="button photos__like"></button>
             </div>
         </li>
         <li class="photos__card">
             <img class="photos__image" src="./images/bald-mountains.svg" alt="Bald Mountains">
             <div class="photos__caption">
                 <p class="photos__text">Bald Mountains</p>
-                <img class="photos__like-button" src="./images/heart.svg" alt="Like button">
+                <button class="button photos__like"></button>
             </div>
         </li>
         <li class="photos__card">
             <img class="photos__image" src="./images/latemar.svg" alt="Latemar">
             <div class="photos__caption">
                 <p class="photos__text">Latemar</p>
-                <img class="photos__like-button" src="./images/heart.svg" alt="Like button">
+                <button class="button photos__like"></button>
             </div>
         </li>
         <li class="photos__card">
             <img class="photos__image" src="./images/vanoise-national.png" alt="Vanoise national">
             <div class="photos__caption">
-                <p class="photos__text">Vanoise nationa...</p>
-                <img class="photos__like-button" src="./images/heart.svg" alt="Like button">
+                <p class="photos__text">Vanoise National Park</p>
+                <button class="button photos__like"></button>
             </div>
         </li>
         <li class="photos__card">
             <img class="photos__image" src="./images/lago-di-braies.svg" alt="Lago di Braies">
             <div class="photos__caption">
                 <p class="photos__text">Lago di Braies</p>
-                <img class="photos__like-button" src="./images/heart.svg" alt="Like button">
+                <button class="button photos__like"></button>
             </div>
         </li>
     </ul>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
     </footer>
-    </div>
     <div class="popup">
         <div class="popup__container">
-            <div class="popup__close">+</div>
+            <img class="button popup__close" src="./images/plus.svg" alt="Close button">
             <h2 class="popup__container-title">Edit profile</h2>
             <form class="popup__container-form" action="#">
-                <input type="text" name="username" class="popup__container-name" value="Jacques Cousteau">
-                <input type="text" name="title" class="popup__container-about-me" value="Explorer">
-                <button type="submit" class="popup__container-save">Save</button>
+                <input type="text" class="popup__container-name" value="Jacques Cousteau">
+                <input type="text" class="popup__container-about-me" value="Explorer">
+                <button type="submit" class="button popup__container-save">Save</button>
             </form>
         </div>
     </div>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
