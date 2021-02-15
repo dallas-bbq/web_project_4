@@ -1,10 +1,10 @@
 .profile__add {
     padding: 0;
-    margin: 0 0 0 165px;
+    margin: 0 0 0 auto;
     width: 150px;
     height: 50px;
     border: 2px solid #FFFFFF;
-    background-color: black;
+    background-color: transparent;
     box-sizing: border-box;
 }
 

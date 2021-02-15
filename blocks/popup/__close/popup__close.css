@@ -1,12 +1,9 @@
 .popup__close {
     transform: rotate(45deg);
-    color: white;
     position: absolute;
-    font-size: 48px;
-    line-height: 100%;
-    font-weight: 400;
-    top: -20px;
-    right: -20px;
+    width: 40px;
+    top: -40px;
+    right: -40px;
 }
 
 .popup__close:hover {
@@ -15,7 +12,8 @@
 
 @media screen and (max-width: 420px) {
     .popup__close {
+        width: 26px;
         right: 0;
-        top: -53px;
+        top: -39px;
     }
 }

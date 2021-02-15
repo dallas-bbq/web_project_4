@@ -11,73 +11,74 @@
 <body class="page">
     <header class="header">
         <img class="logo" src="./images/logo.svg" alt="Around The US logo">
-        <div class="line"></div>
     </header>
-    <div class="profile">
+    <section class="profile">
         <img class="profile__avatar" src="./images/cousteau.svg" alt="Jacques Cousteau">
         <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <img class="button profile__edit" src="images/edit-button.svg" alt="Edit button">
+            <img class="button profile__edit" type="button" src="images/edit-button.svg" alt="Edit button">
             <p class="profile__title">Explorer</p>
         </div>
-        <button class="button profile__add">
+        <button type="submit" class="button profile__add">
             <img class="profile__plus-sign" src="./images/plus.svg" alt="Plus sign">
         </button>
-    </div>
-    <ul class="photos">
-        <li class="photos__card">
-            <img class="photos__image" src="./images/yosemite-valley.svg" alt="Yosemite valley">
-            <div class="photos__caption">
-                <p class="photos__text">Yosemite Valley</p>
-                <button class="button photos__like"></button>
-            </div>
-        </li>
-        <li class="photos__card">
-            <img class="photos__image" src="./images/lake-louise.svg" alt="Lake Louise">
-            <div class="photos__caption">
-                <p class="photos__text">Lake Louise</p>
-                <button class="button photos__like"></button>
-            </div>
-        </li>
-        <li class="photos__card">
-            <img class="photos__image" src="./images/bald-mountains.svg" alt="Bald Mountains">
-            <div class="photos__caption">
-                <p class="photos__text">Bald Mountains</p>
-                <button class="button photos__like"></button>
-            </div>
-        </li>
-        <li class="photos__card">
-            <img class="photos__image" src="./images/latemar.svg" alt="Latemar">
-            <div class="photos__caption">
-                <p class="photos__text">Latemar</p>
-                <button class="button photos__like"></button>
-            </div>
-        </li>
-        <li class="photos__card">
-            <img class="photos__image" src="./images/vanoise-national.png" alt="Vanoise national">
-            <div class="photos__caption">
-                <p class="photos__text">Vanoise National Park</p>
-                <button class="button photos__like"></button>
-            </div>
-        </li>
-        <li class="photos__card">
-            <img class="photos__image" src="./images/lago-di-braies.svg" alt="Lago di Braies">
-            <div class="photos__caption">
-                <p class="photos__text">Lago di Braies</p>
-                <button class="button photos__like"></button>
-            </div>
-        </li>
-    </ul>
+    </section>
+    <section class="grid">
+        <ul class="photos">
+            <li class="photos__card">
+                <img class="photos__image" src="./images/yosemite-valley.svg" alt="Yosemite valley">
+                <div class="photos__caption">
+                    <h2 class="photos__text">Yosemite Valley</h2>
+                    <button type="button" class="button photos__like"></button>
+                </div>
+            </li>
+            <li class="photos__card">
+                <img class="photos__image" src="./images/lake-louise.svg" alt="Lake Louise">
+                <div class="photos__caption">
+                    <h2 class="photos__text">Lake Louise</h2>
+                    <button type="button" class="button photos__like"></button>
+                </div>
+            </li>
+            <li class="photos__card">
+                <img class="photos__image" src="./images/bald-mountains.svg" alt="Bald Mountains">
+                <div class="photos__caption">
+                    <h2 class="photos__text">Bald Mountains</h2>
+                    <button type="button" class="button photos__like"></button>
+                </div>
+            </li>
+            <li class="photos__card">
+                <img class="photos__image" src="./images/latemar.svg" alt="Latemar">
+                <div class="photos__caption">
+                    <h2 class="photos__text">Latemar</h2>
+                    <button type="button" class="button photos__like"></button>
+                </div>
+            </li>
+            <li class="photos__card">
+                <img class="photos__image" src="./images/vanoise-national.png" alt="Vanoise national">
+                <div class="photos__caption">
+                    <h2 class="photos__text">Vanoise National Park</h2>
+                    <button type="button" class="button photos__like"></button>
+                </div>
+            </li>
+            <li class="photos__card">
+                <img class="photos__image" src="./images/lago-di-braies.svg" alt="Lago di Braies">
+                <div class="photos__caption">
+                    <h2 class="photos__text">Lago di Braies</h2>
+                    <button type="button" class="button photos__like"></button>
+                </div>
+            </li>
+        </ul>
+    </section>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_closed">
         <div class="popup__container">
-            <img class="button popup__close" src="./images/plus.svg" alt="Close button">
+            <img class="button popup__close" type="button" src="./images/plus.svg" alt="Close button">
             <h2 class="popup__container-title">Edit profile</h2>
-            <form class="popup__container-form" action="#">
-                <input type="text" class="popup__container-name" value="Jacques Cousteau">
-                <input type="text" class="popup__container-about-me" value="Explorer">
+            <form  name="editProfile" class="popup__container-form" action="#">
+                <input type="text" name="username" class="popup__input popup__input_name" value="Jacques Cousteau">
+                <input type="text" name="title" class="popup__input popup__input_about-me" value="Explorer">
                 <button type="submit" class="button popup__container-save">Save</button>
             </form>
         </div>
