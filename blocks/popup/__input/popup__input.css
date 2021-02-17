@@ -5,5 +5,6 @@
     border-top: none;
     border-left: none;
     border-right: none;
+    font-weight: 400;
     border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
 }

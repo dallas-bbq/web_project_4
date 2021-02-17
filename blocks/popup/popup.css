@@ -4,8 +4,6 @@
 @import url(./__container-form/popup__container-form.css);
 @import url(./__input/popup__input.css);
 @import url(./__container-save/popup__container-save.css);
-@import url(./_open/popup_open.css);
-@import url(./_open/popup_closed.css);
 .popup {
     width: 100%;
     height: 100%;
@@ -13,6 +11,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;

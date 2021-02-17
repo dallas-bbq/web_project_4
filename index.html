@@ -16,12 +16,10 @@
         <img class="profile__avatar" src="./images/cousteau.svg" alt="Jacques Cousteau">
         <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <img class="button profile__edit" type="button" src="images/edit-button.svg" alt="Edit button">
+            <button aria-label="edit" class="profile__edit button" type="button"></button>
             <p class="profile__title">Explorer</p>
         </div>
-        <button type="submit" class="button profile__add">
-            <img class="profile__plus-sign" src="./images/plus.svg" alt="Plus sign">
-        </button>
+        <button aria-label="add" type="submit" class="button profile__add"></button>
     </section>
     <section class="grid">
         <ul class="photos">
@@ -72,13 +70,13 @@
     <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
     </footer>
-    <div class="popup popup_closed">
+    <div class="popup closed">
         <div class="popup__container">
-            <img class="button popup__close" type="button" src="./images/plus.svg" alt="Close button">
+            <button aria-label="close" class="button popup__close" type="button"></button>
             <h2 class="popup__container-title">Edit profile</h2>
-            <form  name="editProfile" class="popup__container-form" action="#">
-                <input type="text" name="username" class="popup__input popup__input_name" value="Jacques Cousteau">
-                <input type="text" name="title" class="popup__input popup__input_about-me" value="Explorer">
+            <form name="editProfile" class="popup__container-form" action="#">
+                <input type="text" name="username" class="popup__input popup__input_type-name" value="Jacques Cousteau">
+                <input type="text" name="title" class="popup__input popup__input_type-about-me" value="Explorer">
                 <button type="submit" class="button popup__container-save">Save</button>
             </form>
         </div>

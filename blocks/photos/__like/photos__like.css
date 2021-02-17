@@ -12,3 +12,8 @@
 .photos__like:hover {
     opacity: 0.6;
 }
+
+.photos__like:active {
+    background-image: url('../../../images/heart-active.svg');
+    opacity: 1;
+}
