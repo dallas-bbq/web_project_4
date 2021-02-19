@@ -9,13 +9,13 @@ let profileTitle = document.querySelector('.profile__title');
 let form = document.querySelector('.popup__container');
 
 function showPopup() {
-    editProfileWindow.classList.remove('closed')
+    editProfileWindow.classList.remove('popup_closed')
     nameInput.value = profileName.textContent
     jobInput.value = profileTitle.textContent
 };
 
 function closePopup() {
-    editProfileWindow.classList.add('closed')
+    editProfileWindow.classList.add('popup_closed')
 };
 
 function handleFormSubmit(evt) {
