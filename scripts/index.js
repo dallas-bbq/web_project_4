@@ -30,17 +30,17 @@ const editProfileModal = document.querySelector('.popup_profile');
 const placesList = document.querySelector('.places__list');
 
 const openProfileModal = document.querySelector('.profile__edit');
-const closeProfileModal = document.querySelector('.popup_close_profile');
+const closeProfileModal = document.querySelector('.popup__close_profile');
 
 const openCardModal = document.querySelector('.profile__add');
-const closeCardModal = document.querySelector('.popup_close_add-card');
+const closeCardModal = document.querySelector('.popup__close_add-card');
 const createButton = document.querySelector('.popup__button_type-create');
 const cardForm = document.querySelector('.popup_add-card');
 const cardTitleInput = document.querySelector('.popup__input_type-title');
 const cardImageInput = document.querySelector('.popup__input_type-link');
 
 const imagePreview = document.querySelector('.popup_image-preview');
-const closeImagePreview = document.querySelector('.popup_close_image-preview');
+const closeImagePreview = document.querySelector('.popup__close_image-preview');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
