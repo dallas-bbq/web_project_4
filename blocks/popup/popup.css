@@ -19,6 +19,10 @@
     align-items: center;
     margin: 0;
     padding: 0;
+    opacity: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
 @media screen and (max-width: 420px) {

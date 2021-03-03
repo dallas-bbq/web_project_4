@@ -49,7 +49,7 @@ function toggleModal(modalWindow) {
         nameInput.value = profileName.textContent
         jobInput.value = profileTitle.textContent
     }
-    modalWindow.classList.toggle('popup_is_closed')
+    modalWindow.classList.toggle('popup_is_open')
 };
 
 openCardModal.addEventListener('click', () => toggleModal(cardForm));
