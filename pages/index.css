@@ -4,9 +4,9 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/grid/grid.css);
-@import url(../blocks/photos/photos.css);
+@import url(../blocks/places/places.css);
+@import url(../blocks/card/card.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/_closed/popup_closed.css);
+@import url(../blocks/popup/_is_closed/popup_is_closed.css);
 @import url(../blocks/button/button.css);

@@ -1,4 +1,4 @@
-.photos__like {
+.card__like {
     margin: 0;
     padding: 0;
     background-image: url('../../../images/heart.svg');
@@ -9,11 +9,6 @@
     outline: none;
 }
 
-.photos__like:hover {
+.card__like:hover {
     opacity: 0.6;
-}
-
-.photos__like:active {
-    background-image: url('../../../images/heart-active.svg');
-    opacity: 1;
 }

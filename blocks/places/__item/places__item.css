@@ -1,7 +1,8 @@
-.photos__card {
+.places__item {
     margin: 0;
     padding: 0;
     max-width: 282px;
     border-radius: 10px;
     background-color: white;
+    position: relative;
 }

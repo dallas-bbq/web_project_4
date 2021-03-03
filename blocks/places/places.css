@@ -1,0 +1,6 @@
+@import url(./__item/places__item.css);
+@import url(./__list/places__list.css);
+.places {
+    margin: 0;
+    padding: 0;
+}
