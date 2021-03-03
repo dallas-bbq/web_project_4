@@ -1,4 +1,3 @@
-// Cards
 const initialCards = [
     {
         name: "Yosemite Valley",
@@ -52,32 +51,48 @@ const popupCaption = document.querySelector('.popup__caption');
 
 function toggleModal(modalWindow) {
     if (modalWindow.classList.contains('.popup_is')) {
-        nameInput.value = profileName.textContent
-        jobInput.value = profileTitle.textContent
+
     }
     modalWindow.classList.toggle('popup_is_open')
-};
+}
 
-function handleFormSubmit(evt) {
+function openEditProfile() {
+
+    nameInput.value = profileName.textContent
+    jobInput.value = profileTitle.textContent
+
+    toggleModal(editProfileModal)
+}
+
+function submitEditProfile(evt) {
     evt.preventDefault();
 
     profileName.textContent = nameInput.value;
     profileTitle.textContent = jobInput.value;
 
     toggleModal(editProfileModal);
-};
+}
 
-profileForm.addEventListener('submit', handleFormSubmit);
+profileForm.addEventListener('submit', submitEditProfile);
 
-openCardModal.addEventListener('click', () => toggleModal(cardForm));
-closeCardModal.addEventListener('click', () => toggleModal(cardForm));
-
-openProfileModal.addEventListener('click', () => toggleModal(editProfileModal));
+openProfileModal.addEventListener('click', () => openEditProfile());
 closeProfileModal.addEventListener('click', () => toggleModal(editProfileModal));
+
+function openAddCard() {
+
+    cardImageInput.value = "";
+    cardTitleInput.value = "";
+
+    toggleModal(cardForm)
+}
+
+openCardModal.addEventListener('click', () => openAddCard());
+closeCardModal.addEventListener('click', () => toggleModal(cardForm));
 
 function showPreview(card) {
     popupImage.src = card.link;
     popupCaption.textContent = card.name;
+    popupImage.alt = card.name;
     toggleModal(imagePreview);
 }
 
@@ -90,6 +105,7 @@ function createCardElement(card) {
 
     cardTitle.textContent = card.name;
     cardImage.style.backgroundImage = `url(${card.link})`;
+    cardImage.alt = card.name;
 
     const likeButton = cardElement.querySelector('.card__like');
     likeButton.addEventListener('click', () => {
@@ -107,7 +123,7 @@ function createCardElement(card) {
     placesList.append(cardElement);
 
     return cardElement;
-};
+}
 
 initialCards.forEach(card => {
     const cardElement = createCardElement(card);
@@ -116,7 +132,7 @@ initialCards.forEach(card => {
 
 closeImagePreview.addEventListener('click', () => toggleModal(imagePreview));
 
-function handleCardFormSubmit(evt) {
+function submitCardForm(evt) {
     evt.preventDefault();
 
     const card = {
@@ -129,8 +145,6 @@ function handleCardFormSubmit(evt) {
     placesList.prepend(cardElement);
 
     toggleModal(cardForm);
-
-    return cardElement;
 }
 
-cardForm.addEventListener('submit', handleCardFormSubmit);
+cardForm.addEventListener('submit', submitCardForm);
