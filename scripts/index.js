@@ -32,6 +32,12 @@ const placesList = document.querySelector('.places__list');
 const openProfileModal = document.querySelector('.profile__edit');
 const closeProfileModal = document.querySelector('.popup__close_profile');
 
+const nameInput = document.querySelector('.popup__input_type-name');
+const jobInput = document.querySelector('.popup__input_type-about-me');
+const profileForm = document.querySelector('.popup__container_type-profile');
+const profileName = document.querySelector('.profile__name');
+const profileTitle = document.querySelector('.profile__title');
+
 const openCardModal = document.querySelector('.profile__add');
 const closeCardModal = document.querySelector('.popup__close_add-card');
 const createButton = document.querySelector('.popup__button_type-create');
@@ -51,6 +57,17 @@ function toggleModal(modalWindow) {
     }
     modalWindow.classList.toggle('popup_is_open')
 };
+
+function handleFormSubmit(evt) {
+    evt.preventDefault();
+
+    profileName.textContent = nameInput.value;
+    profileTitle.textContent = jobInput.value;
+
+    toggleModal(editProfileModal);
+};
+
+profileForm.addEventListener('submit', handleFormSubmit);
 
 openCardModal.addEventListener('click', () => toggleModal(cardForm));
 closeCardModal.addEventListener('click', () => toggleModal(cardForm));
@@ -108,21 +125,6 @@ function handleCardFormSubmit(evt) {
     }
 
     const cardElement = createCardElement(card);
-
-    const cardImage = document.querySelector('.card__image');
-
-    cardImage.addEventListener('click', () => showPreview(card));
-
-    const likeButton = document.querySelector('.card__like');
-    likeButton.addEventListener('click', () => {
-        likeButton.classList.toggle('card__like_act')
-    });
-
-    const deleteButton = cardElement.querySelector('.card__delete');
-    deleteButton.addEventListener('click', () => {
-        const cardItem = deleteButton.closest('.places__item');
-        cardItem.remove();
-    })
 
     placesList.prepend(cardElement);
 
