@@ -29,11 +29,15 @@
     </footer>
     <div class="popup popup_profile">
         <div class="popup__container popup__container_type-profile">
-            <button aria-label="close" class="button popup__close popup__close_profile" type="button"></button>
+            <button type="button" aria-label="close" class="button popup__close popup__close_profile"></button>
             <h2 class="popup__container-title">Edit profile</h2>
-            <form name="editProfile" class="popup__container-form" action="#">
-                <input type="text" name="username" class="popup__input popup__input_type-name" value="Jacques Cousteau">
-                <input type="text" name="title" class="popup__input popup__input_type-about-me" value="Explorer">
+            <form name="editProfile" class="popup__form" action="#">
+                <input required minlength="2" maxlength="40" type="text" id="username-input"
+                    class="popup__input popup__input_type-name" value="Jacques Cousteau">
+                <span class="popup__error" id="username-input-error"></span>
+                <input required minlength="2" maxlength="200" type="text" id="about-input"
+                    class="popup__input popup__input_type-about-me" value="Explorer">
+                <span class="popup__error" id="about-input-error"></span>
                 <button type="submit" class="button popup__button popup__button_type-save">Save</button>
             </form>
         </div>
@@ -42,18 +46,25 @@
         <div class="popup__container popup__container_type-card">
             <button aria-label="close" class="button popup__close popup__close_add-card" type="button"></button>
             <h2 class="popup__container-title">New place</h2>
-            <form name="addCard" class="popup__container-form" action="#">
-                <input type="text" name="title" class="popup__input popup__input_type-title" value="" placeholder="Title">
-                <input type="url" name="link" class="popup__input popup__input_type-link" value="" placeholder="Image link">
+            <form name="addCard" class="popup__form" action="#">
+                <input required minlength="1" maxlength="30" type="text" id="title-input"
+                    class="popup__input popup__input_type-title" value="" placeholder="Title">
+                <span class="popup__error" id="title-input-error"></span>
+                <input required type="url" id="link-input" class="popup__input popup__input_type-link" value=""
+                    placeholder="Image link">
+                <span class="popup__error" id="link-input-error"></span>
                 <button type="submit" class="button popup__button popup__button_type-create">Create</button>
             </form>
         </div>
     </div>
     <div class="popup popup_image-preview">
-        <div class="popup__container popup__container_type-image-preview">
-            <button aria-label="close" class="button popup__close popup__close_image-preview" type="button"></button>
-            <img class="popup__image" src="#" alt="#">
-            <h2 class="popup__caption"></h2>
+        <div class="overlay">
+            <div class="popup__container popup__container_type-image-preview">
+                <button aria-label="close" class="button popup__close popup__close_image-preview"
+                    type="button"></button>
+                <img class="popup__image" src="#" alt="#">
+                <h2 class="popup__caption"></h2>
+            </div>
         </div>
     </div>
     <template id="card-template">
@@ -67,6 +78,7 @@
         </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
 </body>
 
 </html>

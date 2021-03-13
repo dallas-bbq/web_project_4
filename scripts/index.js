@@ -49,10 +49,10 @@ const closeImagePreview = document.querySelector('.popup__close_image-preview');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
-function toggleModal(modalWindow) {
-    if (modalWindow.classList.contains('.popup_is')) {
+const overlay = document.querySelectorAll('.popup');
 
-    }
+function toggleModal(modalWindow) {
+    if (modalWindow.classList.contains('.popup_is')) { }
     modalWindow.classList.toggle('popup_is_open')
 }
 
@@ -73,11 +73,6 @@ function submitEditProfile(evt) {
     toggleModal(editProfileModal);
 }
 
-profileForm.addEventListener('submit', submitEditProfile);
-
-openProfileModal.addEventListener('click', () => openEditProfile());
-closeProfileModal.addEventListener('click', () => toggleModal(editProfileModal));
-
 function openAddCard() {
 
     cardImageInput.value = "";
@@ -85,9 +80,6 @@ function openAddCard() {
 
     toggleModal(cardForm)
 }
-
-openCardModal.addEventListener('click', () => openAddCard());
-closeCardModal.addEventListener('click', () => toggleModal(cardForm));
 
 function showPreview(card) {
     popupImage.src = card.link;
@@ -130,8 +122,6 @@ initialCards.forEach(card => {
     placesList.append(cardElement);
 });
 
-closeImagePreview.addEventListener('click', () => toggleModal(imagePreview));
-
 function submitCardForm(evt) {
     evt.preventDefault();
 
@@ -147,4 +137,35 @@ function submitCardForm(evt) {
     toggleModal(cardForm);
 }
 
+
+// event listeners
+
+document.addEventListener('keydown', function onEscKey(e) {
+    const key = e.key
+    if (key === "Escape") {
+        e.preventDefault()
+        console.log(e.target)
+        console.log(e.currentTarget)
+    }
+})
+
+profileForm.addEventListener('submit', submitEditProfile);
+
+openProfileModal.addEventListener('click', () => openEditProfile());
+
+closeProfileModal.addEventListener('click', () => toggleModal(editProfileModal));
+
+openCardModal.addEventListener('click', () => openAddCard());
+
+closeCardModal.addEventListener('click', () => toggleModal(cardForm));
+
+closeImagePreview.addEventListener('click', () => toggleModal(imagePreview));``
+
 cardForm.addEventListener('submit', submitCardForm);
+
+overlay.forEach(element => {
+    element.addEventListener('click', function close(e) {
+        if (e.target && e.target.matches('div')) { }
+        toggleModal(e.target)
+    })
+})

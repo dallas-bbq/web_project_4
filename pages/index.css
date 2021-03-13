@@ -7,6 +7,6 @@
 @import url(../blocks/places/places.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/button/button.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_is_open/popup_is_open.css);
-@import url(../blocks/button/button.css);
