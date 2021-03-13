@@ -49,11 +49,22 @@ const closeImagePreview = document.querySelector('.popup__close_image-preview');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
-const overlay = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
+
+function closeByEsc(evt) {
+    if (evt.key === 'Escape') {
+        const openedModal = document.querySelector('.popup_is_open')
+        toggleModal(openedModal)
+    }
+}
 
 function toggleModal(modalWindow) {
-    if (modalWindow.classList.contains('.popup_is')) { }
     modalWindow.classList.toggle('popup_is_open')
+    if (modalWindow.classList.contains('popup_is_open')) {
+        document.addEventListener('keydown', closeByEsc);
+    } else {
+        document.removeEventListener('keydown', closeByEsc);
+    }
 }
 
 function openEditProfile() {
@@ -112,8 +123,6 @@ function createCardElement(card) {
 
     cardImage.addEventListener('click', () => showPreview(card));
 
-    placesList.append(cardElement);
-
     return cardElement;
 }
 
@@ -140,16 +149,6 @@ function submitCardForm(evt) {
 
 // event listeners
 
-document.addEventListener('keydown', function onEscKey(e) {
-    const key = e.key
-    if (key === "Escape") {
-        e.preventDefault()
-        editProfileModal.classList.remove('popup_is_open')
-        imagePreview.classList.remove('popup_is_open')
-        cardForm.classList.remove('popup_is_open')
-    }
-})
-
 profileForm.addEventListener('submit', submitEditProfile);
 
 openProfileModal.addEventListener('click', () => openEditProfile());
@@ -160,13 +159,17 @@ openCardModal.addEventListener('click', () => openAddCard());
 
 closeCardModal.addEventListener('click', () => toggleModal(cardForm));
 
-closeImagePreview.addEventListener('click', () => toggleModal(imagePreview));``
+closeImagePreview.addEventListener('click', () => toggleModal(imagePreview)); ``
 
 cardForm.addEventListener('submit', submitCardForm);
 
-overlay.forEach(element => {
-    element.addEventListener('click', function close(e) {
-        if (e.target && e.target.matches('div')) { }
-        toggleModal(e.target)
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_is_open')) {
+            toggleModal(popup)
+        }
+        if (evt.target.classList.contains('popup__close')) {
+            toggleModal(popup)
+        }
     })
 })

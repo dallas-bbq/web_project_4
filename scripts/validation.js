@@ -35,8 +35,8 @@ function checkInputValiditiy(input, form, config) {
 }
 
 function enableValidation(config) {
-    const formElement = document.querySelectorAll(config.formSelector);
-    formElement.forEach(form => {
+    const formElements = document.querySelectorAll(config.formSelector);
+    formElements.forEach(form => {
         form.addEventListener('submit', (evt) => {
             evt.preventDefault()
         })
