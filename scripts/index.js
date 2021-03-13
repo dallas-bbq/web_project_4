@@ -144,8 +144,9 @@ document.addEventListener('keydown', function onEscKey(e) {
     const key = e.key
     if (key === "Escape") {
         e.preventDefault()
-        console.log(e.target)
-        console.log(e.currentTarget)
+        editProfileModal.classList.remove('popup_is_open')
+        imagePreview.classList.remove('popup_is_open')
+        cardForm.classList.remove('popup_is_open')
     }
 })
 
