@@ -1,3 +1,7 @@
+import Card from './Card.js'
+import { closeByEsc, toggleModal } from './utils.js'
+import FormValidation from './FormValidation.js'
+
 const initialCards = [
     {
         name: "Yosemite Valley",
@@ -26,8 +30,6 @@ const initialCards = [
 ];
 
 const editProfileModal = document.querySelector('.popup_profile');
-const placesList = document.querySelector('.places__list');
-
 const openProfileModal = document.querySelector('.profile__edit');
 
 const nameInput = document.querySelector('.popup__input_type-name');
@@ -37,32 +39,33 @@ const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__title');
 
 const openCardModal = document.querySelector('.profile__add');
-const createButton = document.querySelector('.popup__button_type-create');
 const cardForm = document.querySelector('.popup_add-card');
 const cardTitleInput = document.querySelector('.popup__input_type-title');
 const cardImageInput = document.querySelector('.popup__input_type-link');
 
-const imagePreview = document.querySelector('.popup_image-preview');
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__caption');
-
 const popups = document.querySelectorAll('.popup');
 
-function closeByEsc(evt) {
-    if (evt.key === 'Escape') {
-        const openedModal = document.querySelector('.popup_is_open')
-        toggleModal(openedModal)
-    }
-}
+const placesList = document.querySelector('.places__list');
 
-function toggleModal(modalWindow) {
-    modalWindow.classList.toggle('popup_is_open')
-    if (modalWindow.classList.contains('popup_is_open')) {
-        document.addEventListener('keydown', closeByEsc);
-    } else {
-        document.removeEventListener('keydown', closeByEsc);
-    }
-}
+const config = {
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__error_visible"
+}; 
+
+initialCards.forEach((data) => {
+    const card = new Card(data, '#card-template');
+    const cardElement = card.createCardElement();
+    placesList.append(cardElement)
+})
+
+const editProfileValidator = new FormValidation(config, profileForm);
+const addCardValidator = new FormValidation(config, cardForm);
+
+editProfileValidator.enableValidation();
+addCardValidator.enableValidation();
 
 function openEditProfile() {
 
@@ -89,56 +92,17 @@ function openAddCard() {
     toggleModal(cardForm)
 }
 
-function showPreview(card) {
-    popupImage.src = card.link;
-    popupCaption.textContent = card.name;
-    popupImage.alt = card.name;
-    toggleModal(imagePreview);
-}
-
-function createCardElement(card) {
-    const cardTemplate = document.querySelector('#card-template').content.querySelector('.places__item');
-    const cardElement = cardTemplate.cloneNode(true);
-
-    const cardImage = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__text');
-
-    cardTitle.textContent = card.name;
-    cardImage.style.backgroundImage = `url(${card.link})`;
-    cardImage.alt = card.name;
-
-    const likeButton = cardElement.querySelector('.card__like');
-    likeButton.addEventListener('click', () => {
-        likeButton.classList.toggle('card__like_act')
-    });
-
-    const deleteButton = cardElement.querySelector('.card__delete');
-    deleteButton.addEventListener('click', () => {
-        const cardItem = deleteButton.closest('.places__item');
-        cardItem.remove();
-    })
-
-    cardImage.addEventListener('click', () => showPreview(card));
-
-    return cardElement;
-}
-
-initialCards.forEach(card => {
-    const cardElement = createCardElement(card);
-    placesList.append(cardElement);
-});
-
 function submitCardForm(evt) {
     evt.preventDefault();
 
-    const card = {
+    const data = {
         name: cardTitleInput.value,
         link: cardImageInput.value
     }
 
-    const cardElement = createCardElement(card);
-
-    placesList.prepend(cardElement);
+    const card = new Card(data, '#card-template');
+    const cardElement = card.createCardElement();
+    placesList.prepend(cardElement)
 
     toggleModal(cardForm);
 }
