@@ -1,9 +1,8 @@
-import { popupImage, popupCaption, imagePreview, closeByEsc, toggleModal } from './utils.js'
-
 class Card {
-    constructor(data, cardTemplateSelector) {
-        this._data = data
-        this._cardTemplateSelector = cardTemplateSelector
+    constructor(data, cardTemplateSelector, handleCardClick) {
+        this._data = data;
+        this._cardTemplateSelector = cardTemplateSelector;
+        this._handleCardClick = handleCardClick
     }
 
     _getCardTemplate() {
@@ -17,18 +16,11 @@ class Card {
     }
 
     _handleLikeButton(evt) {
-        evt.target.classList.toggle('card__like_act')
+        evt.target.classList.toggle('card__like_act');
     }
 
     _handleDeleteButton() {
         this._cardElement.remove();
-    }
-
-    _handleShowPreview() {
-        popupImage.src = this._data.link
-        popupCaption.textContent = this._data.name;
-        popupImage.alt = this._data.name;
-        toggleModal(imagePreview);
     }
 
     _setEventListeners() {
@@ -39,7 +31,7 @@ class Card {
 
         likeButton.addEventListener('click', this._handleLikeButton);
         deleteButton.addEventListener('click', () => this._handleDeleteButton());
-        cardImage.addEventListener('click', () => this._handleShowPreview());
+        cardImage.addEventListener('click', () => this._handleCardClick(this._data.name, this._data.link));
     }
 
     createCardElement() {

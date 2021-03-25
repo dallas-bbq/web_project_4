@@ -1,5 +1,4 @@
 import Card from './Card.js'
-import { closeByEsc, toggleModal } from './utils.js'
 import FormValidation from './FormValidation.js'
 
 const initialCards = [
@@ -44,6 +43,9 @@ const cardTitleInput = document.querySelector('.popup__input_type-title');
 const cardImageInput = document.querySelector('.popup__input_type-link');
 
 const popups = document.querySelectorAll('.popup');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
+const imagePreview = document.querySelector('.popup_image-preview');
 
 const placesList = document.querySelector('.places__list');
 
@@ -53,12 +55,23 @@ const config = {
     inactiveButtonClass: "popup__button_disabled",
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible"
-}; 
+};
+
+const handleCardClick = (name, link) => {
+    popupImage.src = link
+    popupCaption.textContent = name;
+    popupImage.alt = name;
+    toggleModal(imagePreview);
+}
+
+const createCard = (data) => {
+    const card = new Card(data, '#card-template', handleCardClick);
+    const cardElement = card.createCardElement();
+    return cardElement;
+}
 
 initialCards.forEach((data) => {
-    const card = new Card(data, '#card-template');
-    const cardElement = card.createCardElement();
-    placesList.append(cardElement)
+    placesList.append(createCard(data))
 })
 
 const editProfileValidator = new FormValidation(config, profileForm);
@@ -67,10 +80,28 @@ const addCardValidator = new FormValidation(config, cardForm);
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
-function openEditProfile() {
+function closeByEsc(evt) {
+    if (evt.key === 'Escape') {
+        const openedModal = document.querySelector('.popup_is_open')
+        toggleModal(openedModal)
+    }
+}
 
-    nameInput.value = profileName.textContent
-    jobInput.value = profileTitle.textContent
+function toggleModal(modalWindow) {
+    modalWindow.classList.toggle('popup_is_open');
+    if (modalWindow.classList.contains('popup_is_open')) {
+        document.addEventListener('keydown', closeByEsc);
+    } else {
+        document.removeEventListener('keydown', closeByEsc);
+    }
+}
+
+
+function openEditProfile() {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileTitle.textContent;
+
+    editProfileValidator.resetValidation();
 
     toggleModal(editProfileModal)
 }
@@ -89,6 +120,8 @@ function openAddCard() {
     cardImageInput.value = "";
     cardTitleInput.value = "";
 
+    addCardValidator.resetValidation();
+
     toggleModal(cardForm)
 }
 
@@ -100,9 +133,7 @@ function submitCardForm(evt) {
         link: cardImageInput.value
     }
 
-    const card = new Card(data, '#card-template');
-    const cardElement = card.createCardElement();
-    placesList.prepend(cardElement)
+    placesList.prepend(createCard(data))
 
     toggleModal(cardForm);
 }
