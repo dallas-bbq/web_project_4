@@ -1,32 +1,10 @@
 import Card from './Card.js'
 import FormValidation from './FormValidation.js'
-
-const initialCards = [
-    {
-        name: "Yosemite Valley",
-        link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-    },
-    {
-        name: "Lake Louise",
-        link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-    },
-    {
-        name: "Bald Mountains",
-        link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-    },
-    {
-        name: "Latemar",
-        link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-    },
-    {
-        name: "Vanoise National Park",
-        link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-    },
-    {
-        name: "Lago di Braies",
-        link: "https://code.s3.yandex.net/web-code/lago.jpg"
-    }
-];
+import Section from './Section.js'
+import { initialCards, placesList } from '../utils/constants.js'
+// import Popup from './Popup.js'
+// import PopupWithForm from './PopupWithForm.js'
+// import PopupWithImage from './PopupWithImage.js'
 
 const editProfileModal = document.querySelector('.popup_profile');
 const openProfileModal = document.querySelector('.profile__edit');
@@ -47,8 +25,6 @@ const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 const imagePreview = document.querySelector('.popup_image-preview');
 
-const placesList = document.querySelector('.places__list');
-
 const config = {
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__button",
@@ -58,27 +34,29 @@ const config = {
 };
 
 const handleCardClick = (name, link) => {
-    popupImage.src = link
+    popupImage.src = link;
     popupCaption.textContent = name;
     popupImage.alt = name;
     toggleModal(imagePreview);
 }
 
-const createCard = (data) => {
-    const card = new Card(data, '#card-template', handleCardClick);
-    const cardElement = card.createCardElement();
-    return cardElement;
-}
+const defaultCardList = new Section({
+    items: initialCards,
+    renderer: () => {
+        const card = new Card(data, '#card-template', handleCardClick);
+        const cardElement = card.createCardElement();
+        return cardElement;
+    },
+}, placesList);
 
-initialCards.forEach((data) => {
-    placesList.append(createCard(data))
-})
+defaultCardList.addItem()
 
 const editProfileValidator = new FormValidation(config, profileForm);
 const addCardValidator = new FormValidation(config, cardForm);
 
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
+
 
 function closeByEsc(evt) {
     if (evt.key === 'Escape') {

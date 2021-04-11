@@ -34,7 +34,7 @@ class Card {
         cardImage.addEventListener('click', () => this._handleCardClick(this._data.name, this._data.link));
     }
 
-    createCardElement() {
+    createCardElement(cardElement) {
         this._cardElement = this._getCardTemplate();
 
         const cardImage = this._cardElement.querySelector('.card__image');
