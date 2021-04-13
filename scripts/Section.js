@@ -7,13 +7,11 @@ export default class Section {
 
     renderItems() {
         this._data.forEach((item) => {
-            this._renderer(item),
-            console.log('renderer')
+            this._renderer(item)
         })
     }
 
-    addItem() {
-        this._containerSelector.append(this._data),
-        console.log('card')
+    addItem(element) {
+        this._containerSelector.append(element)
     }
 }
