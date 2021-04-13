@@ -20,7 +20,7 @@ const handleCardClick = (name, link) => {
     popupImage.src = link;
     popupCaption.textContent = name;
     popupImage.alt = name;
-    console.log(popupWithImage);
+    popupWithImage.open();
 }
 
 const defaultCardList = new Section({
