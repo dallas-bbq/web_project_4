@@ -2,18 +2,18 @@ import Card from './Card.js'
 import FormValidation from './FormValidation.js'
 import Section from './Section.js'
 import {
-    initialCards, placesList, popups, popupImage, editProfileModal, openProfileModal, nameInput,
+    initialCards, placesList, popupImage, editProfileModal, openProfileModal, nameInput,
     jobInput, profileForm, profileName, profileTitle, openCardModal, cardForm, cardTitleInput,
-    cardImageInput, popupCaption, config, popupWithImagePreview
+    cardImageInput, popupCaption, config
 } from '../utils/constants.js'
 import Popup from './Popup.js'
 import PopupWithImage from './PopupWithImage.js'
 
 // rendering popups
 
-const popupList = new Popup(popups);
+const popupList = new Popup('.popup');
 popupList.setEventListeners();
-const popupWithImage = new PopupWithImage(popupWithImagePreview);
+const popupWithImage = new PopupWithImage('.popup__container_type-image-preview');
 
 // rendering cards 
 const handleCardClick = (name, link) => {

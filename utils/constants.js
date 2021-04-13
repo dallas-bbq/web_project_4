@@ -49,13 +49,11 @@ const cardForm = document.querySelector('.popup_add-card');
 const cardTitleInput = document.querySelector('.popup__input_type-title');
 const cardImageInput = document.querySelector('.popup__input_type-link');
 
-const popups = document.querySelector('.popup');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
-const popupWithImagePreview = document.querySelector('.popup__container_type-image-preview')
 
 export {
-    initialCards, placesList, popups, popupImage, editProfileModal, openProfileModal, nameInput,
+    initialCards, placesList, popupImage, editProfileModal, openProfileModal, nameInput,
     jobInput, profileForm, profileName, profileTitle, openCardModal, cardForm, cardTitleInput, 
-    cardImageInput, popupCaption, popupWithImagePreview, config
+    cardImageInput, popupCaption, config
 }
