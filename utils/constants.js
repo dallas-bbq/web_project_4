@@ -35,25 +35,19 @@ const config = {
 
 const placesList = document.querySelector('.places__list');
 
-const editProfileModal = document.querySelector('.popup_profile');
 const openProfileModal = document.querySelector('.profile__edit');
-
-const nameInput = document.querySelector('.popup__input_type-name');
-const jobInput = document.querySelector('.popup__input_type-about-me');
-const profileForm = document.querySelector('.popup__container_type-profile');
-const profileName = document.querySelector('.profile__name');
-const profileTitle = document.querySelector('.profile__title');
-
 const openCardModal = document.querySelector('.profile__add');
+
+const profileForm = document.querySelector('.popup__container_type-profile');
 const cardForm = document.querySelector('.popup_add-card');
-const cardTitleInput = document.querySelector('.popup__input_type-title');
-const cardImageInput = document.querySelector('.popup__input_type-link');
 
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
+const nameInput = document.querySelector('.profile__name');
+const jobInput = document.querySelector('.profile__title');
+
 export {
-    initialCards, placesList, popupImage, editProfileModal, openProfileModal, nameInput,
-    jobInput, profileForm, profileName, profileTitle, openCardModal, cardForm, cardTitleInput, 
-    cardImageInput, popupCaption, config
+    initialCards, placesList, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
+    cardForm, config, nameInput, jobInput
 }
