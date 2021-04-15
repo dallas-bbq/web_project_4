@@ -11,23 +11,22 @@ import PopupWithForm from './PopupWithForm.js'
 import UserInfo from './UserInfo.js'
 
 // rendering popups
-
-
 const popupList = new Popup('.popup');
 popupList.setEventListeners();
 
 const popupWithImage = new PopupWithImage('.popup_image-preview');
 popupWithImage.setEventListeners();
 
+const userInfo = new UserInfo('.profile__name', '.profile__title');
+
 const editProfilePopup = new PopupWithForm(
     '.popup_profile', 
     () => { 
-        const userInfo = new UserInfo('.popup__input_type-name', '.popup__input_type-about-me');
         userInfo.getUserInfo(),
         userInfo.setUserInfo({ name: nameInput.value, job: jobInput.value }),
         editProfilePopup.close()
     })
-
+    
 const editProfileValidator = new FormValidation(config, profileForm);
 const addCardValidator = new FormValidation(config, cardForm);
 
@@ -56,4 +55,12 @@ const defaultCardList = new Section({
 defaultCardList.renderItems();
 
 // event listeners
-openProfileModal.addEventListener('click', () => { editProfilePopup.open() } )
+openProfileModal.addEventListener('click', () => { 
+    const userData = userInfo.getUserInfo();
+
+    nameInput.textContent = userData.name;
+    jobInput.textContent = userData.job;
+
+    userInfo.setUserInfo(userData);
+    editProfilePopup.open() 
+} )

@@ -7,6 +7,12 @@ export default class PopupWithForm extends Popup {
         this.setEventListeners()
     }
 
+    close() { 
+        super.close();
+        this._form = document.querySelector('.popup__form');
+        this._form.reset();
+    }
+
     _getInputValues() { 
         const values = {}
 
@@ -18,18 +24,12 @@ export default class PopupWithForm extends Popup {
         return values
     }
 
-    close() { 
-        super.close();
-        this._form = document.querySelector('.popup__form');
-        this._form.reset();
-    }
-
     setEventListeners() {
         super.setEventListeners();
         
             this._popup.addEventListener('submit', (e) => {
             e.preventDefault()
-            this._submitHandler()
+            this._submitHandler(this._getInputValues())
         })
      } 
     

@@ -44,8 +44,8 @@ const cardForm = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
-const nameInput = document.querySelector('.profile__name');
-const jobInput = document.querySelector('.profile__title');
+const nameInput = document.querySelector('.popup__input_type-name');
+const jobInput = document.querySelector('.popup__input_type-about-me');
 
 export {
     initialCards, placesList, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
