@@ -43,9 +43,9 @@ const userInfo = new UserInfo('.profile__name', '.profile__title');
 const editProfilePopup = new PopupWithForm(
     '.popup_profile',
     () => {
-        const info = userInfo.getUserInfo();
-        userInfo.setUserInfo(info);
-        editProfilePopup.close();
+        const newUserInfo = userInfo.getUserInfo({ name: nameInput.textContent, job: jobInput.textContent });
+        userInfo.setUserInfo(newUserInfo);
+        editProfilePopup.close()
     })
 
 const editProfileValidator = new FormValidation(config, profileForm);
