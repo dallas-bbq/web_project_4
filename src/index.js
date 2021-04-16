@@ -1,14 +1,14 @@
-import Card from './Card.js'
-import FormValidation from './FormValidation.js'
-import Section from './Section.js'
+import Card from '../scripts/Card.js'
+import FormValidation from '../scripts/FormValidation.js'
+import Section from '../scripts/Section.js'
 import {
     initialCards, placesList, openProfileModal, profileForm, popupImage, popupCaption, openCardModal,
     cardForm, config, nameInput, jobInput
 } from '../utils/constants.js'
-import Popup from './Popup.js'
-import PopupWithImage from './PopupWithImage.js'
-import PopupWithForm from './PopupWithForm.js'
-import UserInfo from './UserInfo.js'
+import Popup from '../scripts/Popup.js'
+import PopupWithImage from '../scripts/PopupWithImage.js'
+import PopupWithForm from '../scripts/PopupWithForm.js'
+import UserInfo from '../scripts/UserInfo.js'
 
 // rendering cards 
 const handleCardClick = (name, link) => {
