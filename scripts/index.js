@@ -2,7 +2,7 @@ import Card from './Card.js'
 import FormValidation from './FormValidation.js'
 import Section from './Section.js'
 import {
-    initialCards, placesList, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
+    initialCards, placesList, openProfileModal, profileForm, popupImage, popupCaption, openCardModal,
     cardForm, config, nameInput, jobInput
 } from '../utils/constants.js'
 import Popup from './Popup.js'
@@ -20,18 +20,18 @@ popupWithImage.setEventListeners();
 const userInfo = new UserInfo('.profile__name', '.profile__title');
 
 const editProfilePopup = new PopupWithForm(
-    '.popup_profile', 
-    () => { 
-        userInfo.getUserInfo(),
-        userInfo.setUserInfo({ name: nameInput.value, job: jobInput.value }),
-        editProfilePopup.close()
+    '.popup_profile',
+    () => {
+        const info = userInfo.getUserInfo();
+        userInfo.setUserInfo(info);
+        editProfilePopup.close();
     })
-    
+
 const editProfileValidator = new FormValidation(config, profileForm);
 const addCardValidator = new FormValidation(config, cardForm);
 
 editProfileValidator.enableValidation();
-addCardValidator.enableValidation(); 
+addCardValidator.enableValidation();
 
 // rendering cards 
 const handleCardClick = (name, link) => {
@@ -55,12 +55,13 @@ const defaultCardList = new Section({
 defaultCardList.renderItems();
 
 // event listeners
-openProfileModal.addEventListener('click', () => { 
+openProfileModal.addEventListener('click', () => {
     const userData = userInfo.getUserInfo();
 
     nameInput.textContent = userData.name;
     jobInput.textContent = userData.job;
 
     userInfo.setUserInfo(userData);
-    editProfilePopup.open() 
-} )
+
+    editProfilePopup.open()
+})
