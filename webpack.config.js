@@ -3,6 +3,8 @@ const path = require('path');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 module.exports = {
     entry: {
         main: "./src/index.js"
@@ -26,20 +28,27 @@ module.exports = {
     module: {
         rules: [
             {
-                // a regular expression that searches for all js files
                 test: /\.js$/,
-                // all files must be processed by babel-loader
                 loader: "babel-loader",
-                // exclude the node_modules folder, we don't need to process files in it
                 exclude: "/node_modules/"
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { 
+                        loader: "css-loader"
+                    }
+                ]
             }
         ]
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/index.html" // path to our index.html file
+            template: "./src/index.html"
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin()
     ],
 };
