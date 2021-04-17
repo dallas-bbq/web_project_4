@@ -1,4 +1,5 @@
 import "./styles/index.css"
+
 import Card from '../scripts/Card.js'
 import FormValidation from '../scripts/FormValidation.js'
 import Section from '../scripts/Section.js'
