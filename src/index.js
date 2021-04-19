@@ -44,7 +44,7 @@ const editProfilePopup = new PopupWithForm(
     {
         popupSelector: '.popup_profile',
         handleFormSubmit: (profileInfo) => {
-            userInfo.setUserInfo(profileInfo.name, profileInfo.job);
+            userInfo.setUserInfo(profileInfo['user-name'], profileInfo['user-about'])
             editProfilePopup.close();
         }
     });
