@@ -33,8 +33,6 @@ const config = {
     errorClass: "popup__error_visible"
 };
 
-const placesList = document.querySelector('.places__list');
-
 const openProfileModal = document.querySelector('.profile__edit');
 const openCardModal = document.querySelector('.profile__add');
 
@@ -48,6 +46,6 @@ const nameInput = document.querySelector('.popup__input_type-name');
 const jobInput = document.querySelector('.popup__input_type-about-me');
 
 export {
-    initialCards, placesList, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
+    initialCards, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
     cardForm, config, nameInput, jobInput
 }
