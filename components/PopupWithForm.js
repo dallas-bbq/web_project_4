@@ -22,7 +22,7 @@ class PopupWithForm extends Popup {
     }
 
     setEventListeners() {
-        this._form = document.querySelector('.popup__form');
+        this._form = this._popup.querySelector('.popup__form');
 
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();

@@ -1,11 +1,11 @@
 import "./styles/index.css"
 import { initialCards, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, cardForm, config, nameInput, jobInput } from '../utils/constants.js'
-import Card from '../scripts/Card.js'
-import FormValidation from '../scripts/FormValidation.js'
-import Section from '../scripts/Section.js'
-import PopupWithImage from '../scripts/PopupWithImage.js'
-import PopupWithForm from '../scripts/PopupWithForm.js'
-import UserInfo from '../scripts/UserInfo.js'
+import Card from '../components/Card.js'
+import FormValidation from '../components/FormValidation.js'
+import Section from '../components/Section.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
 
 // validators
 const editProfileValidator = new FormValidation(config, profileForm);
@@ -44,7 +44,8 @@ const editProfilePopup = new PopupWithForm(
     {
         popupSelector: '.popup_profile',
         handleFormSubmit: (profileInfo) => {
-            userInfo.setUserInfo(profileInfo['user-name'], profileInfo['user-about'])
+            userInfo.setUserInfo(profileInfo['user-name'], profileInfo['user-about']);
+
             editProfilePopup.close();
         }
     });
@@ -52,19 +53,21 @@ const editProfilePopup = new PopupWithForm(
 
 // add card
 
-const addCardPopup = new PopupWithForm({
-    popupSelector: '.popup_add-card',
-    handleFormSubmit: (cardInfo) => {
-        const newCard = new Card(cardInfo, '#card-template', handleCardClick);
-        const cardElement = newCard.createCardElement();
+const addCardPopup = new PopupWithForm(
+    {
+        popupSelector: '.popup_add-card',
+        handleFormSubmit: (cardInfo) => {
+            const newCard = new Card(cardInfo, '#card-template', handleCardClick);
 
-        const cardImage = cardElement.querySelector('.card__image');
-        cardImage.addEventListener('click', () => handleCardClick(cardInfo.name, cardInfo.link));
+            const cardElement = newCard.createCardElement();
 
-        cardsList.prependItem(newCard);
-        addCardPopup.close();
-    }
-});
+            const cardImage = cardElement.querySelector('.card__image');
+            cardImage.addEventListener('click', () => handleCardClick(cardInfo.name, cardInfo.link));
+
+            cardsList.setItem(cardElement);
+            addCardPopup.close();
+        }
+    });
 
 
 // event listeners

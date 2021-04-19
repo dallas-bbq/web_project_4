@@ -27,14 +27,13 @@ class Card {
         const likeButton = this._cardElement.querySelector('.card__like');
         const deleteButton = this._cardElement.querySelector('.card__delete');
         const cardImage = this._cardElement.querySelector('.card__image');
-        const cardForm = document.querySelector('.popup_add-card');
 
         likeButton.addEventListener('click', this._handleLikeButton);
         deleteButton.addEventListener('click', () => this._handleDeleteButton());
         cardImage.addEventListener('click', () => this._handleCardClick(this._data.name, this._data.link));
     }
 
-    createCardElement(_cardElement) {
+    createCardElement() {
         this._cardElement = this._getCardTemplate();
 
         const cardImage = this._cardElement.querySelector('.card__image');
