@@ -9,10 +9,10 @@
 
 <body class="page">
     <header class="header">
-        <img class="logo" src="<%=require('../images/logo.svg')%>" alt="Around The US logo">
+        <img class="logo" src="<%=require('./images/logo.svg')%>" alt="Around The US logo">
     </header>
     <section class="profile">
-        <img class="profile__avatar" src="<%=require('../images/cousteau.svg')%>" alt="Jacques Cousteau">
+        <img class="profile__avatar" src="<%=require('./images/cousteau.svg')%>" alt="Jacques Cousteau">
         <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button aria-label="edit" class="profile__edit button" type="button"></button>
@@ -68,7 +68,7 @@
     </div>
     <template id="card-template">
         <li class="card places__item">
-            <button type="button" class="button card__delete"><img src="<%=require('../images/trash.svg')%>" alt="Trash icon"></button>
+            <button type="button" class="button card__delete"><img src="<%=require('./images/trash.svg')%>" alt="Trash icon"></button>
             <div class="card__image" styles=""></div>
             <div class="card__caption">
                 <h2 class="card__text"></h2>

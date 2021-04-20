@@ -1,5 +1,5 @@
-import "./styles/index.css"
-import { initialCards, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, cardForm, config, nameInput, jobInput } from '../utils/constants.js'
+import "./index.css"
+import { initialCards, openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput } from '../utils/constants.js'
 import Card from '../components/Card.js'
 import FormValidation from '../components/FormValidation.js'
 import Section from '../components/Section.js'
@@ -15,22 +15,24 @@ editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
 // cards 
+const imagePreview = new PopupWithImage('.popup_image-preview');
+
 const handleCardClick = (name, link) => {
-    const imagePreview = new PopupWithImage('.popup_image-preview')
-    imagePreview.open(name, link)
+    imagePreview.open(name, link);
+}
+
+const createCard = (data) => {
+    const card = new Card(data, '#card-template', handleCardClick);
+    const cardItem = card.createCardElement();
+
+    return cardItem;
 }
 
 const cardsList = new Section({
     data: initialCards,
     renderer: (data) => {
-        const card = new Card(data, '#card-template', handleCardClick);
-        const cardElement = card.createCardElement();
-
-        const cardImage = cardElement.querySelector('.card__image');
-        cardImage.addEventListener('click', () => handleCardClick(data.name, data.link));
-
+        const cardElement = createCard(data);
         cardsList.setItem(cardElement);
-
     },
 }, '.places__list');
 
@@ -56,14 +58,8 @@ const editProfilePopup = new PopupWithForm(
 const addCardPopup = new PopupWithForm(
     {
         popupSelector: '.popup_add-card',
-        handleFormSubmit: (cardInfo) => {
-            const newCard = new Card(cardInfo, '#card-template', handleCardClick);
-
-            const cardElement = newCard.createCardElement();
-
-            const cardImage = cardElement.querySelector('.card__image');
-            cardImage.addEventListener('click', () => handleCardClick(cardInfo.name, cardInfo.link));
-
+        handleFormSubmit: (data) => {
+            const cardElement = createCard(data);
             cardsList.setItem(cardElement);
             addCardPopup.close();
         }
@@ -72,6 +68,16 @@ const addCardPopup = new PopupWithForm(
 
 // event listeners
 
-openProfileModal.addEventListener('click', () => editProfilePopup.open());
+openProfileModal.addEventListener('click', () => {
+    const { name, job } = userInfo.getUserInfo();
+    nameInput.value = name;
+    jobInput.value = job;
+    editProfilePopup.open();
+    editProfileValidator.resetValidation();
+});
 
-openCardModal.addEventListener('click', () => addCardPopup.open());
+openCardModal.addEventListener('click', () => {
+
+    addCardPopup.open();
+    addCardValidator.resetValidation();
+});
