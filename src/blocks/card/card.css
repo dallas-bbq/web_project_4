@@ -4,3 +4,5 @@
 @import url(./__delete/card__delete.css);
 @import url(./__like/card__like_act/card__like_act.css);
 @import url(./__text/card__text.css);
+@import url(./__like-count/card__like-count.css);
+@import url(./__like-container/card__like-container.css);

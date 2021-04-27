@@ -13,7 +13,7 @@ class Api {
             .catch((err) => {
                 console.log(err);
             });
-        }
+    }
 
     //PATCH https://around.nomoreparties.co/v1/groupId/users/me editing profile
     setUserInfo({ name, about }) {
@@ -66,7 +66,27 @@ class Api {
 
     //PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId adding likes
     //DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId removing likes
-    changeCardLike(cacrdID, like) { }
+    addLike() {
+        return fetch(this.baseUrl + '/cards/likes/' + `${cardID}`, {
+            method: "PUT",
+            headers: this.headers
+        })
+            .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    deleteLike() {
+        return fetch(this.baseUrl + '/cards/likes/' + `${cardID}`, {
+            method: "DELETE",
+            headers: this.headers
+        })
+            .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
 
     //PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar updating profile pic

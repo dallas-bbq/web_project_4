@@ -49,10 +49,11 @@
                 <input required minlength="1" maxlength="30" type="text" name="name" id="title-input"
                     class="popup__input popup__input_type-title" value="" placeholder="Title">
                 <span class="popup__error" id="title-input-error"></span>
-                <input required type="url" name="link" id="link-input" class="popup__input popup__input_type-link" value=""
-                    placeholder="Image link">
+                <input required type="url" name="link" id="link-input" class="popup__input popup__input_type-link"
+                    value="" placeholder="Image link">
                 <span class="popup__error" id="link-input-error"></span>
-                <button type="submit" class="button popup__submit popup__button popup__button_type-create">Create</button>
+                <button type="submit"
+                    class="button popup__submit popup__button popup__button_type-create">Create</button>
             </form>
         </div>
     </div>
@@ -68,11 +69,15 @@
     </div>
     <template id="card-template">
         <li class="card places__item">
-            <button type="button" class="button card__delete"><img src="<%=require('./images/trash.svg')%>" alt="Trash icon"></button>
+            <button type="button" class="button card__delete"><img src="<%=require('./images/trash.svg')%>"
+                    alt="Trash icon"></button>
             <div class="card__image" styles=""></div>
             <div class="card__caption">
                 <h2 class="card__text"></h2>
-                <button type="button" class="button card__like"></button>
+                <div class="card__like-container">
+                    <button type="button" class="button card__like"></button>
+                    <p class="card__like-count"></p>
+                </div>
             </div>
         </li>
     </template>

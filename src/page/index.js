@@ -7,7 +7,7 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 
-import { initialCards, openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput } from '../utils/constants.js'
+import { initialCards, openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput, likeButton } from '../utils/constants.js'
 
 
 // API
@@ -45,6 +45,11 @@ api.getCardsList()
                     const id = card.getId();
                     api.removeCard(id)
                         .then(res => card.handleDeleteButton())
+                },
+                handleLikeClick: () => {
+                    api.addLike(item) 
+                    .then (res => card.handleLikeButton(item))
+                    .then (res => console.log(item))
                 }
             })
             const cardItem = card.createCardElement();

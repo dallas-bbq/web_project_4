@@ -45,7 +45,9 @@ const popupCaption = document.querySelector('.popup__caption');
 const nameInput = document.querySelector('.popup__input_type-name');
 const jobInput = document.querySelector('.popup__input_type-about-me');
 
+const likeButton = document.querySelector('.card__like');
+
 export {
     initialCards, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
-    cardForm, config, nameInput, jobInput
+    cardForm, config, nameInput, jobInput, likeButton
 }
