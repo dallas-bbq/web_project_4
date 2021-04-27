@@ -1,8 +1,14 @@
 class Card {
-    constructor(data, cardTemplateSelector, handleCardClick) {
+    constructor({ data, cardTemplateSelector, handleCardClick, handleDeleteClick }) {
         this._data = data;
         this._cardTemplateSelector = cardTemplateSelector;
-        this._handleCardClick = handleCardClick
+        this._handleCardClick = handleCardClick;
+        this._handleDeleteClick = handleDeleteClick;
+        this._id = data._id;
+    }
+
+    getId() {
+        console.log(this._id)
     }
 
     _getCardTemplate() {
@@ -12,14 +18,14 @@ class Card {
             .querySelector('.places__item')
             .cloneNode(true)
 
-        return cardTemplate
+        return cardTemplate;
     }
 
     _handleLikeButton(evt) {
         evt.target.classList.toggle('card__like_act');
     }
 
-    _handleDeleteButton() {
+    handleDeleteButton() {
         this._cardElement.remove();
     }
 
@@ -29,7 +35,9 @@ class Card {
         const cardImage = this._cardElement.querySelector('.card__image');
 
         likeButton.addEventListener('click', this._handleLikeButton);
-        deleteButton.addEventListener('click', () => this._handleDeleteButton());
+
+        deleteButton.addEventListener('click', () => this.getId());
+
         cardImage.addEventListener('click', () => this._handleCardClick(this._data.name, this._data.link));
     }
 
