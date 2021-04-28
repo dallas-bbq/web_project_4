@@ -66,18 +66,23 @@ class Api {
 
     //PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId adding likes
     //DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId removing likes
-    addLike() {
-        return fetch(this.baseUrl + '/cards/likes/' + `${cardID}`, {
+    addLike(cardID) {
+        return fetch(this.baseUrl + '/cards/likes/' + cardID, {
             method: "PUT",
             headers: this.headers
         })
-            .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-            .catch((err) => {
+            .then (res => {
+                if (res.ok) {
+                    return res.json()
+                } return Promise.reject(`Error: ${res.status}`)
+            })
+       
+            .catch ((err) => {
                 console.log(err);
             })
     }
 
-    deleteLike() {
+    deleteLike(cardID) {
         return fetch(this.baseUrl + '/cards/likes/' + `${cardID}`, {
             method: "DELETE",
             headers: this.headers

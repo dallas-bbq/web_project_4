@@ -7,7 +7,7 @@ import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 
-import { initialCards, openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput, likeButton } from '../utils/constants.js'
+import { openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput, likeButton } from '../utils/constants.js'
 
 
 // API
@@ -26,6 +26,26 @@ const addCardValidator = new FormValidation(config, cardForm);
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
+// handle profile info
+
+const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' });
+
+api.getUserInfo()
+    .then(res => {
+        userInfo.setUserInfo({ name: res.name, job: res.about })
+    })
+
+
+const editProfilePopup = new PopupWithForm(
+    {
+        popupSelector: '.popup_profile',
+        handleFormSubmit: (profileInfo) => {
+            api.setUserInfo({ name: profileInfo['user-name'], about: profileInfo['user-about'] })
+                .then(res => userInfo.setUserInfo({ name: res.name, job: res.about }))
+            editProfilePopup.close();
+        }
+    });
+
 // handle cards
 const imagePreview = new PopupWithImage('.popup_image-preview');
 
@@ -33,25 +53,40 @@ const handleCardClick = (name, link) => {
     imagePreview.open(name, link);
 }
 
+
+
+// when page loads check if i liked the card --> like button active or not
+// if click --> toggle ; 
+// if it was white --> send to the server added like ; 
+// if it was black -->  send to the server delete request;
+// update the number
+
 api.getCardsList()
     .then(res => {
         // rendering a card
         const createCard = (data) => {
-            const card = new Card({
-                data: data,
-                cardTemplateSelector: '#card-template',
-                handleCardClick: handleCardClick,
-                handleDeleteClick: () => {
-                    const id = card.getId();
-                    api.removeCard(id)
-                        .then(res => card.handleDeleteButton())
-                },
-                handleLikeClick: () => {
-                    api.addLike(item) 
-                    .then (res => card.handleLikeButton(item))
-                    .then (res => console.log(item))
+            const card = new Card(
+                data,
+                data.likes,
+                data._id,
+                '#card-template',
+                handleCardClick,
+                () => {
+                    // if (data.likes.owner === userInfo._userName.innerText) {
+                    //     api.deleteLike(data._id)
+                    //         .then(res => card.setLikes())
+                    //         .then(res => card.likeButtonToggle())
+                    //         .then(res => console.log(res))
+                    // } else 
+                    api.addLike(data._id)
+                        .then((res) => {
+                            card.setLikes()
+                            card.likeButtonToggle()
+                        })
+                    //.then(res => console.log(card._likes.name.includes(userInfo._userName.innerText)))
                 }
-            })
+            )
+
             const cardItem = card.createCardElement();
             return cardItem;
         }
@@ -87,26 +122,6 @@ api.getCardsList()
             addCardValidator.resetValidation();
         });
     })
-
-// handle profile info
-
-const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' });
-
-api.getUserInfo()
-    .then(res => {
-        userInfo.setUserInfo({ name: res.name, job: res.about })
-    })
-
-
-const editProfilePopup = new PopupWithForm(
-    {
-        popupSelector: '.popup_profile',
-        handleFormSubmit: (profileInfo) => {
-            api.setUserInfo({ name: profileInfo['user-name'], about: profileInfo['user-about'] })
-                .then(res => userInfo.setUserInfo({ name: res.name, job: res.about }));
-            editProfilePopup.close();
-        }
-    });
 
 // event listeners
 
