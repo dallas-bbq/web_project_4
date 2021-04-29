@@ -4,6 +4,7 @@ import FormValidation from '../components/FormValidation.js'
 import Section from '../components/Section.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js'
+import PopupWithConfirm from '../components/PopupWithConfirm.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 
@@ -27,24 +28,14 @@ editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
 // handle profile info
-
-const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' });
+const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' })
 
 api.getUserInfo()
     .then((user) => {
-        userInfo.setUserInfo(user)
+        return userInfo.setUserInfo(user)
     })
 
-const editProfilePopup = new PopupWithForm(
-    {
-        popupSelector: '.popup_profile',
-        handleFormSubmit: (profileInfo) => {
-            api.setUserInfo({ name: profileInfo['user-name'], about: profileInfo['user-about'] })
-                .then((user) => userInfo.setUserInfo(user))
-            editProfilePopup.close();
-        }
-    });
-
+const confirmDeletePopup = new PopupWithConfirm('.popup_confirm')
 // handle cards
 const imagePreview = new PopupWithImage('.popup_image-preview');
 
@@ -60,16 +51,22 @@ const createCard = (data) => {
         '#card-template',
         handleCardClick,
         () => {
-            // if (data.likes.some((user) => { data.likes._id === userInfo.setUserInfo()._id })) {
-            //     api.deleteLike(data._id)
-            //         .then(res => card.setLikes())
-            //         .then(res => card.likeButtonToggle())
-            // } else
-                api.addLike(data._id)
+            if (data.likes.some((item) => { return item._id === userInfo._id })) {
+                api.deleteLike(data._id)
                     .then((res) => {
-                        card.setLikes(data.likes)
+                        card.setLikes(res.likes)
                         card.likeButtonToggle()
                     })
+            } else
+                api.addLike(data._id)
+                    .then((res) => {
+                        card.setLikes(res.likes)
+                        card.likeButtonToggle()
+                    })
+        },
+        () => {
+            confirmDeletePopup.open();
+            confirmDeletePopup.setEventListeners();
         }
     )
 
