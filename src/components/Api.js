@@ -7,6 +7,7 @@ class Api {
     //GET https://around.nomoreparties.co/v1/groupId/users/me
     getUserInfo() {
         return fetch(this.baseUrl + '/users/me', {
+            method: "GET",
             headers: this.headers
         })
             .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
@@ -31,6 +32,7 @@ class Api {
     //GET https://around.nomoreparties.co/v1/groupId/cards
     getCardsList() {
         return fetch(this.baseUrl + '/cards', {
+            method: "GET",
             headers: this.headers
         })
             .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
@@ -63,9 +65,7 @@ class Api {
                 console.log(err);
             })
     }
-
-    //PUT https://around.nomoreparties.co/v1/groupId/cards/likes/cardId adding likes
-    //DELETE https://around.nomoreparties.co/v1/groupId/cards/likes/cardId removing likes
+    
     addLike(cardID) {
         return fetch(this.baseUrl + '/cards/likes/' + cardID, {
             method: "PUT",

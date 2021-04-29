@@ -1,8 +1,8 @@
 class Card {
-    constructor(data, likes, id, cardTemplateSelector, handleCardClick, handleLikeClick) {
+    constructor(data, id, likes, cardTemplateSelector, handleCardClick, handleLikeClick) {
         this._data = data;
-        this._likes = likes;
         this._id = id;
+        this._likes = likes;
         this._cardTemplateSelector = cardTemplateSelector;
         this._handleCardClick = handleCardClick;
         this._handleLikeClick = handleLikeClick;
@@ -12,10 +12,9 @@ class Card {
         return this._id;
     }
 
-    setLikes() {
+    setLikes(likes) {
         const likeCount = this._cardElement.querySelector('.card__like-count');
         likeCount.textContent = this._likes.length;
-        console.log(this._likes.length)
     }
 
     createCardElement() {
@@ -47,7 +46,7 @@ class Card {
     }
 
     likeButtonToggle() {
-        this._cardElement.querySelector('.card__like').classList.toggle('card__like_act');
+        this._cardElement.querySelector('.card__like').classList.toggle('card__like_act');      
     }
 
     handleDeleteButton() {

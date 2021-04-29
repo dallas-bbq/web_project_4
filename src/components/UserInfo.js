@@ -11,9 +11,10 @@ class UserInfo {
         }
     }
 
-    setUserInfo({ name, job }) {
-        this._userName.textContent = name;
-        this._userJob.textContent = job
+    setUserInfo(newUser) {
+        this._userName.textContent = newUser.name;
+        this._userJob.textContent = newUser.about;
+        this._id = newUser.id;
     }
 }
 
