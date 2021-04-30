@@ -9,17 +9,20 @@ class PopupWithConfirm extends Popup {
     this._confirm = confirm;
   }
 
-  setEventListeners() {
-    const submitButton = this._popup.querySelector('.popup__submit');
+  setSubmitButton() {
+    super.setSubmitButton();
 
-    submitButton.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      // this._confirm();
-      console.log('clicked');
-      this._popup.close();
-    })
-    
+    // this._submitButton.textContent = 'Yes'
+  }
+
+  setEventListeners() {
     super.setEventListeners();
+
+    this._popup.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._confirm();
+      this.close();
+    })
   }
 }
 

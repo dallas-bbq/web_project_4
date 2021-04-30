@@ -48,29 +48,36 @@ const createCard = (data) => {
         data,
         data._id,
         data.likes,
+        data.owner._id === userInfo._id,
+        data.likes.some((item) => { return item._id === userInfo._id }),
         '#card-template',
         handleCardClick,
         () => {
-            if (data.likes.some((item) => { return item._id === userInfo._id })) {
+            if (card._likedByOwner) {
                 api.deleteLike(data._id)
                     .then((res) => {
                         card.setLikes(res.likes)
                         card.likeButtonToggle()
                     })
-            } else
+            } else {
                 api.addLike(data._id)
                     .then((res) => {
                         card.setLikes(res.likes)
                         card.likeButtonToggle()
                     })
+            }
         },
         () => {
             confirmDeletePopup.open();
-            confirmDeletePopup.setEventListeners();
+            confirmDeletePopup.handleConfirmClick(() => {
+                confirmDeletePopup.setLoadingButton();
+                api.removeCard(data._id)
+                    .then(res => { card.deleteCard() })
+            });
         }
     )
-
     const cardItem = card.createCardElement();
+
     return cardItem;
 }
 
