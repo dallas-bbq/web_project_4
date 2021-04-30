@@ -4,7 +4,6 @@ class Api {
         this.headers = headers
     }
 
-    //GET https://around.nomoreparties.co/v1/groupId/users/me
     getUserInfo() {
         return fetch(this.baseUrl + '/users/me', {
             method: "GET",
@@ -16,7 +15,6 @@ class Api {
             });
     }
 
-    //PATCH https://around.nomoreparties.co/v1/groupId/users/me editing profile
     setUserInfo({ name, about }) {
         return fetch(this.baseUrl + '/users/me', {
             method: "PATCH",
@@ -29,7 +27,6 @@ class Api {
             });
     }
 
-    //GET https://around.nomoreparties.co/v1/groupId/cards
     getCardsList() {
         return fetch(this.baseUrl + '/cards', {
             method: "GET",
@@ -41,7 +38,6 @@ class Api {
             });
     }
 
-    //POST https://around.nomoreparties.co/v1/groupId/cards
     addCard({ name, link }) {
         return fetch(this.baseUrl + '/cards', {
             method: "POST",
@@ -54,7 +50,6 @@ class Api {
             });
     }
 
-    //DELETE https://around.nomoreparties.co/v1/groupId/cards/cardId 
     removeCard(cardID) {
         return fetch(this.baseUrl + '/cards/' + `${cardID}`, {
             method: "DELETE",
@@ -65,19 +60,19 @@ class Api {
                 console.log(err);
             })
     }
-    
+
     addLike(cardID) {
         return fetch(this.baseUrl + '/cards/likes/' + cardID, {
             method: "PUT",
             headers: this.headers
         })
-            .then (res => {
+            .then(res => {
                 if (res.ok) {
                     return res.json()
                 } return Promise.reject(`Error: ${res.status}`)
             })
-       
-            .catch ((err) => {
+
+            .catch((err) => {
                 console.log(err);
             })
     }
@@ -96,12 +91,6 @@ class Api {
 
     //PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar updating profile pic
     setUserPic() { }
-
-    getInitialCards() {
-        // ...
-    }
-
-    // other methods for working with the API
 }
 
 export default Api

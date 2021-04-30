@@ -20,25 +20,37 @@ const api = new Api({
     }
 });
 
-// validators
+// classes
 const editProfileValidator = new FormValidation(config, profileForm);
 const addCardValidator = new FormValidation(config, cardForm);
+
+const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' });
+const imagePreview = new PopupWithImage('.popup_image-preview');
+const confirmDeletePopup = new PopupWithConfirm('.popup_confirm');
 
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
-// handle profile info
-const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' })
+// profile
 
 api.getUserInfo()
-    .then((user) => {
-        return userInfo.setUserInfo(user)
+    .then(res => {
+        userInfo.setUserInfo(res)
     })
 
-const confirmDeletePopup = new PopupWithConfirm('.popup_confirm')
-// handle cards
-const imagePreview = new PopupWithImage('.popup_image-preview');
+const editProfilePopup = new PopupWithForm(
+    {
+        popupSelector: '.popup_profile',
+        handleFormSubmit: (info) => {
+            api.setUserInfo({ name: info['user-name'], about: info['user-about'] })
+                .then(info => {
+                    userInfo.setUserInfo(info)
+                    editProfilePopup.close();
+                })
+        }
+    });
 
+// cards
 const handleCardClick = (name, link) => {
     imagePreview.open(name, link);
 }
@@ -99,7 +111,8 @@ api.getCardsList()
             popupSelector: '.popup_add-card',
             handleFormSubmit: (data) => {
                 api.addCard(data)
-                    .then(res => {
+                    .then(data => {
+                        addCardPopup.setLoadingButton();
                         const cardElement = createCard(data);
                         cardsList.setItem(cardElement);
                         addCardPopup.close();
