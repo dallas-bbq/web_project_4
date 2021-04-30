@@ -1,8 +1,8 @@
 import Popup from './Popup.js'
 
 class PopupWithConfirm extends Popup {
-  constructor(popupSelector) {
-    super(popupSelector)
+  constructor(popupSelector, defaultButtonText) {
+    super(popupSelector, defaultButtonText)
   }
 
   handleConfirmClick(confirm) {

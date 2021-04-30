@@ -1,6 +1,7 @@
 class Popup {
-    constructor(popupSelector) {
+    constructor(popupSelector, defaultButtonText) {
         this._popup = document.querySelector(popupSelector);
+        this._defaultButtonText = defaultButtonText;
         this._handleEscClose = this._handleEscClose.bind(this);
         this._submitButton = this._popup.querySelector('.popup__submit');
         this.setEventListeners();
@@ -31,6 +32,10 @@ class Popup {
 
     setLoadingButton() {
         this._submitButton.textContent = 'Saving...';
+    }
+
+    setDefaultButton() {
+        this._submitButton.textContent = this._defaultButtonText;
     }
 
     setEventListeners() {

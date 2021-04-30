@@ -26,7 +26,7 @@ const addCardValidator = new FormValidation(config, cardForm);
 
 const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' });
 const imagePreview = new PopupWithImage('.popup_image-preview');
-const confirmDeletePopup = new PopupWithConfirm('.popup_confirm');
+const confirmDeletePopup = new PopupWithConfirm('.popup_confirm', 'Yes');
 
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
@@ -41,10 +41,12 @@ api.getUserInfo()
 const editProfilePopup = new PopupWithForm(
     {
         popupSelector: '.popup_profile',
+        defaultButtonText: 'Save',
         handleFormSubmit: (info) => {
+            editProfilePopup.setLoadingButton();
             api.setUserInfo({ name: info['user-name'], about: info['user-about'] })
                 .then(info => {
-                    userInfo.setUserInfo(info)
+                    userInfo.setUserInfo(info);
                     editProfilePopup.close();
                 })
         }
@@ -80,6 +82,7 @@ const createCard = (data) => {
             }
         },
         () => {
+            confirmDeletePopup.setDefaultButton();
             confirmDeletePopup.open();
             confirmDeletePopup.handleConfirmClick(() => {
                 confirmDeletePopup.setLoadingButton();
@@ -109,10 +112,11 @@ api.getCardsList()
         // add new card
         const addCardPopup = new PopupWithForm({
             popupSelector: '.popup_add-card',
+            defaultButtonText: 'Create',
             handleFormSubmit: (data) => {
+                addCardPopup.setLoadingButton();
                 api.addCard(data)
                     .then(data => {
-                        addCardPopup.setLoadingButton();
                         const cardElement = createCard(data);
                         cardsList.setItem(cardElement);
                         addCardPopup.close();
@@ -120,9 +124,9 @@ api.getCardsList()
             }
         });
 
-        // add card modal open 
         openCardModal.addEventListener('click', () => {
             addCardPopup.open();
+            addCardPopup.setDefaultButton();
             addCardValidator.resetValidation();
         });
     })
@@ -134,5 +138,7 @@ openProfileModal.addEventListener('click', () => {
     nameInput.value = name;
     jobInput.value = job;
     editProfilePopup.open();
+    editProfilePopup.setDefaultButton();
     editProfileValidator.resetValidation();
 });
+
