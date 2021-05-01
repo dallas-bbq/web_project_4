@@ -38,6 +38,7 @@ const openCardModal = document.querySelector('.profile__add');
 
 const profileForm = document.querySelector('.popup__container_type-profile');
 const cardForm = document.querySelector('.popup_add-card');
+const avatarForm = document.querySelector('.popup_edit-avatar');
 
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
@@ -51,5 +52,5 @@ const avatarEditButton = document.querySelector('.profile__avatar-edit');
 
 export {
     initialCards, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
-    cardForm, config, nameInput, jobInput, likeButton, avatarEditButton
+    cardForm, config, nameInput, jobInput, likeButton, avatarEditButton, avatarForm
 }

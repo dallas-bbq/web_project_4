@@ -8,7 +8,7 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 
-import { openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput, avatarEditButton } from '../utils/constants.js'
+import { openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput, avatarEditButton, avatarForm } from '../utils/constants.js'
 
 
 // API
@@ -23,6 +23,7 @@ const api = new Api({
 // classes
 const editProfileValidator = new FormValidation(config, profileForm);
 const addCardValidator = new FormValidation(config, cardForm);
+const editAvatarValidator = new FormValidation(config, avatarForm);
 
 const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title', avatarSelector: '.profile__avatar' });
 const imagePreview = new PopupWithImage('.popup_image-preview');
@@ -30,6 +31,7 @@ const confirmDeletePopup = new PopupWithConfirm('.popup_confirm', 'Yes');
 
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
+editAvatarValidator.enableValidation();
 
 // profile
 
@@ -159,6 +161,7 @@ openProfileModal.addEventListener('click', () => {
 
 avatarEditButton.addEventListener('click', () => {
     editAvatar.setDefaultButton();
+    editAvatarValidator.resetValidation();
     editAvatar.open();
 })
 
