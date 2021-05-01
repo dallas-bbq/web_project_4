@@ -88,9 +88,17 @@ class Api {
             })
     }
 
-
-    //PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar updating profile pic
-    setUserPic() { }
+    setUserPic({ avatar }) {
+        return fetch(this.baseUrl + '/users/me/avatar', {
+            method: "PATCH",
+            headers: this.headers,
+            body: JSON.stringify({ avatar })
+        })
+            .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 }
 
 export default Api

@@ -11,8 +11,11 @@
     <header class="header">
         <img class="logo" src="<%=require('./images/logo.svg')%>" alt="Around The US logo">
     </header>
+
     <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/cousteau.svg')%>" alt="Jacques Cousteau">
+        <div class="profile__avatar">
+            <button type="button" class="button profile__avatar-edit"></button>
+        </div>
         <div class="profile__info">
             <h1 class="profile__name"></h1>
             <button aria-label="edit" class="profile__edit button" type="button"></button>
@@ -20,12 +23,15 @@
         </div>
         <button aria-label="add" type="button" class="button profile__add"></button>
     </section>
+
     <section class="places">
         <ul class="places__list"></ul>
     </section>
+
     <footer class="footer">
         <p class="footer__copyright">&copy; 2021 Around The U.S.</p>
     </footer>
+
     <div class="popup popup_profile">
         <div class="popup__container popup__container_type-profile">
             <button type="button" aria-label="close" class="button popup__close popup__close_profile"></button>
@@ -41,6 +47,7 @@
             </form>
         </div>
     </div>
+
     <div class="popup popup_add-card">
         <div class="popup__container popup__container_type-card">
             <button aria-label="close" class="button popup__close popup__close_add-card" type="button"></button>
@@ -52,11 +59,11 @@
                 <input required type="url" name="link" id="link-input" class="popup__input popup__input_type-link"
                     value="" placeholder="Image link">
                 <span class="popup__error" id="link-input-error"></span>
-                <button type="submit"
-                    class="button popup__submit popup__button popup__button_type-create"></button>
+                <button type="submit" class="button popup__submit popup__button popup__button_type-create"></button>
             </form>
         </div>
     </div>
+
     <div class="popup popup_image-preview">
         <div class="overlay">
             <div class="popup__container popup__container_type-image-preview">
@@ -67,6 +74,7 @@
             </div>
         </div>
     </div>
+
     <div class="popup popup_confirm">
         <div class="popup__container popup__container_type-confirm">
             <button aria-label="close" class="button popup__close popup__close_confirm" type="button"></button>
@@ -76,7 +84,20 @@
             </form>
         </div>
     </div>
+
+    <div class="popup popup_edit-avatar">
+        <div class="popup__container popup__container_type-edit-avatar">
+            <button aria-label="close" class="button popup__close popup__close_edit-avatar" type="button"></button>
+            <h2 class="popup__container-title">Change your profile picture</h2>
+            <form name="edit-avatar" class="popup__form popup__form_type-edit-avatar" action="#">
+                <input required type="url" name="avatar-link" id="avatar-link-input" class="popup__input popup__input_type-edit-avatar"
+                    placeholder="Image link">
+                <span class="popup__error" id="link-input-error"></span>
+                <button type="submit" class="button popup__submit popup__button popup__button_type-edit-avatar"></button>
+            </form>
+        </div>
     </div>
+
     <template id="card-template">
         <li class="card places__item">
             <button type="button" class="button card__delete"><img src="<%=require('./images/trash.svg')%>"

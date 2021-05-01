@@ -8,7 +8,7 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 
-import { openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput } from '../utils/constants.js'
+import { openProfileModal, profileForm, openCardModal, cardForm, config, nameInput, jobInput, avatarEditButton } from '../utils/constants.js'
 
 
 // API
@@ -24,7 +24,7 @@ const api = new Api({
 const editProfileValidator = new FormValidation(config, profileForm);
 const addCardValidator = new FormValidation(config, cardForm);
 
-const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title' });
+const userInfo = new UserInfo({ userNameSelector: '.profile__name', userJobSelector: '.profile__title', avatarSelector: '.profile__avatar' });
 const imagePreview = new PopupWithImage('.popup_image-preview');
 const confirmDeletePopup = new PopupWithConfirm('.popup_confirm', 'Yes');
 
@@ -51,6 +51,21 @@ const editProfilePopup = new PopupWithForm(
                 })
         }
     });
+
+const editAvatar = new PopupWithForm(
+    {
+        popupSelector: '.popup_edit-avatar',
+        defaultButtonText: 'Save',
+        handleFormSubmit: (info) => {
+            editAvatar.setLoadingButton();
+            api.setUserPic({ avatar: info['avatar-link'] })
+                .then(info => {
+                    userInfo.setUserInfo(info);
+                    editAvatar.close();
+                })
+        }
+    }
+)
 
 // cards
 const handleCardClick = (name, link) => {
@@ -141,4 +156,9 @@ openProfileModal.addEventListener('click', () => {
     editProfilePopup.setDefaultButton();
     editProfileValidator.resetValidation();
 });
+
+avatarEditButton.addEventListener('click', () => {
+    editAvatar.setDefaultButton();
+    editAvatar.open();
+})
 

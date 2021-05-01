@@ -47,7 +47,9 @@ const jobInput = document.querySelector('.popup__input_type-about-me');
 
 const likeButton = document.querySelector('.card__like');
 
+const avatarEditButton = document.querySelector('.profile__avatar-edit');
+
 export {
     initialCards, openProfileModal, profileForm, popupImage, popupCaption, openCardModal, 
-    cardForm, config, nameInput, jobInput, likeButton
+    cardForm, config, nameInput, jobInput, likeButton, avatarEditButton
 }
