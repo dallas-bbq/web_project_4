@@ -51,6 +51,9 @@ const editProfilePopup = new PopupWithForm(
                     userInfo.setUserInfo(info);
                     editProfilePopup.close();
                 })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
     });
 
@@ -65,6 +68,9 @@ const editAvatar = new PopupWithForm(
                     userInfo.setUserInfo(info);
                     editAvatar.close();
                 })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
     }
 )
@@ -90,12 +96,18 @@ const createCard = (data) => {
                         card.setLikes(res.likes)
                         card.likeButtonToggle()
                     })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             } else {
                 api.addLike(data._id)
                     .then((res) => {
                         card.setLikes(res.likes)
                         card.likeButtonToggle()
                     })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
         },
         () => {
@@ -105,6 +117,9 @@ const createCard = (data) => {
                 confirmDeletePopup.setLoadingButton();
                 api.removeCard(data._id)
                     .then(res => { card.deleteCard() })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             });
         }
     )
@@ -138,6 +153,9 @@ api.getCardsList()
                         cardsList.setItem(cardElement);
                         addCardPopup.close();
                     })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             }
         });
 
