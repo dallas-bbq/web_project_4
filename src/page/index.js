@@ -33,13 +33,45 @@ editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 editAvatarValidator.enableValidation();
 
-// profile
-const getUserInfo = api.getUserInfo()
-    .then(res => {
-        userInfo.setUserInfo(res)
-    })
+Promise.all([api.getUserInfo(), api.getCardsList()])
+    .then(([user, cards]) => {
+        userInfo.setUserInfo(user);
 
-Promise.all([getUserInfo, getCardsList]);
+        const cardsList = new Section({
+            data: cards,
+            renderer: (data) => {
+                const cardElement = createCard(data);
+                cardsList.setItem(cardElement);
+            }
+        },
+            '.places__list')
+
+        cardsList.renderItems();
+
+        // add new card
+        const addCardPopup = new PopupWithForm({
+            popupSelector: '.popup_add-card',
+            defaultButtonText: 'Create',
+            handleFormSubmit: (data) => {
+                addCardPopup.setLoadingButton();
+                api.addCard(data)
+                    .then(data => {
+                        const cardElement = createCard(data);
+                        cardsList.setItem(cardElement);
+                        addCardPopup.close();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        });
+
+        openCardModal.addEventListener('click', () => {
+            addCardPopup.open();
+            addCardPopup.setDefaultButton();
+            addCardValidator.resetValidation();
+        });
+    })
 
 const editProfilePopup = new PopupWithForm(
     {
@@ -76,7 +108,7 @@ const editAvatar = new PopupWithForm(
     }
 )
 
-// cards
+// card items
 const handleCardClick = (name, link) => {
     imagePreview.open(name, link);
 }
@@ -100,8 +132,8 @@ const createCard = (data) => {
                     .catch((err) => {
                         console.log(err);
                     });
-                    card._likedByOwner = false;
-                
+                card._likedByOwner = false;
+
             } else {
                 api.addLike(data._id)
                     .then((res) => {
@@ -111,9 +143,9 @@ const createCard = (data) => {
                     .catch((err) => {
                         console.log(err);
                     });
-                    card._likedByOwner = true;
+                card._likedByOwner = true;
             }
-            
+
         },
         () => {
             confirmDeletePopup.setDefaultButton();
@@ -121,10 +153,11 @@ const createCard = (data) => {
             confirmDeletePopup.handleConfirmClick(() => {
                 confirmDeletePopup.setLoadingButton();
                 api.removeCard(data._id)
+                    .then(res => card.deleteCard())
                     .catch((err) => {
                         console.log(err);
                     });
-                card.deleteCard();
+
                 confirmDeletePopup.close();
             });
         }
@@ -133,44 +166,6 @@ const createCard = (data) => {
     const cardItem = card.createCardElement();
     return cardItem;
 }
-
-const getCardsList = api.getCardsList()
-    .then(res => {
-        const cardsList = new Section({
-            data: res,
-            renderer: (data) => {
-                const cardElement = createCard(data);
-                cardsList.setItem(cardElement);
-            }
-        },
-            '.places__list')
-
-        cardsList.renderItems();
-
-        // add new card
-        const addCardPopup = new PopupWithForm({
-            popupSelector: '.popup_add-card',
-            defaultButtonText: 'Create',
-            handleFormSubmit: (data) => {
-                addCardPopup.setLoadingButton();
-                api.addCard(data)
-                    .then(data => {
-                        const cardElement = createCard(data);
-                        cardsList.setItem(cardElement);
-                        addCardPopup.close();
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-        });
-
-        openCardModal.addEventListener('click', () => {
-            addCardPopup.open();
-            addCardPopup.setDefaultButton();
-            addCardValidator.resetValidation();
-        });
-    })
 
 // event listeners
 
