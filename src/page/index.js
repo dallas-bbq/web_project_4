@@ -34,11 +34,12 @@ addCardValidator.enableValidation();
 editAvatarValidator.enableValidation();
 
 // profile
-
-api.getUserInfo()
+const getUserInfo = api.getUserInfo()
     .then(res => {
         userInfo.setUserInfo(res)
     })
+
+Promise.all([getUserInfo, getCardsList]);
 
 const editProfilePopup = new PopupWithForm(
     {
@@ -94,21 +95,25 @@ const createCard = (data) => {
                 api.deleteLike(data._id)
                     .then((res) => {
                         card.setLikes(res.likes)
-                        card.likeButtonToggle()
+                        card.likeButtonToggle();
                     })
                     .catch((err) => {
                         console.log(err);
                     });
+                    card._likedByOwner = false;
+                
             } else {
                 api.addLike(data._id)
                     .then((res) => {
-                        card.setLikes(res.likes)
-                        card.likeButtonToggle()
+                        card.setLikes(res.likes);
+                        card.likeButtonToggle();
                     })
                     .catch((err) => {
                         console.log(err);
                     });
+                    card._likedByOwner = true;
             }
+            
         },
         () => {
             confirmDeletePopup.setDefaultButton();
@@ -116,19 +121,20 @@ const createCard = (data) => {
             confirmDeletePopup.handleConfirmClick(() => {
                 confirmDeletePopup.setLoadingButton();
                 api.removeCard(data._id)
-                    .then(res => { card.deleteCard() })
                     .catch((err) => {
                         console.log(err);
                     });
+                card.deleteCard();
+                confirmDeletePopup.close();
             });
         }
     )
-    const cardItem = card.createCardElement();
 
+    const cardItem = card.createCardElement();
     return cardItem;
 }
 
-api.getCardsList()
+const getCardsList = api.getCardsList()
     .then(res => {
         const cardsList = new Section({
             data: res,

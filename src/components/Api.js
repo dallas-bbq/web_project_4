@@ -51,15 +51,11 @@ class Api {
             method: "PUT",
             headers: this.headers
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                } return Promise.reject(`Error: ${res.status}`)
-            })
+            .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
     }
 
     deleteLike(cardID) {
-        return fetch(this.baseUrl + '/cards/likes/' + `${cardID}`, {
+        return fetch(this.baseUrl + '/cards/likes/' + cardID, {
             method: "DELETE",
             headers: this.headers
         })
